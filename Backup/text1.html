@@ -1,0 +1,164 @@
+<html>
+<head>
+    <title>Resizable Draggable Text Box</title>
+    <style>
+        #text-box {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            width: 300px;
+            height: 100px;
+            padding: 10px;
+            background-color:transparent;
+            border: 2px solid #fafafa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px; /* Initial font size */
+            text-align: center;
+            resize: none; /* To disable native resize */
+            z-index: 3;
+            border:none;
+        }
+        #text-box:hover{
+            cursor:all-scroll;
+        }
+
+        .resize-handle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: #06615c;
+            z-index: 4;
+        }
+        [contenteditable]:focus {
+    outline: 0px solid transparent;
+}
+
+        /* Positioning the resize handles */
+        .resize-handle.nw { top: -5px; left: -5px; cursor: nw-resize; }
+        .resize-handle.ne { top: -5px; right: -5px; cursor: ne-resize; }
+        .resize-handle.sw { bottom: -5px; left: -5px; cursor: sw-resize; }
+        .resize-handle.se { bottom: -5px; right: -5px; cursor: se-resize; }
+    </style>
+</head>
+<body>
+    <div id="text-box">
+        <div id="text-content" style="cursor: auto;" contenteditable="true">I'm Near East Video Editor</div>
+        <!-- Resizable handles -->
+        <div class="resize-handle nw"></div>
+        <div class="resize-handle ne"></div>
+        <div class="resize-handle sw"></div>
+        <div class="resize-handle se"></div>
+    </div>
+
+    <script>
+        // Make the text-box draggable and resizable
+        makeResizable1AndDraggable1(document.getElementById("text-box"));
+
+        function makeResizable1AndDraggable1(elmnt) {
+            let initialFontSize = 20;  // Set your initial font size here
+            let isResizing = false;    // Variable to track if resizing is active
+
+            // Make the element draggable, only if it's not resizing
+            dragElement1(elmnt);
+
+            // Add resizing functionality
+            makeResizable1(elmnt);
+
+            function dragElement1(elmnt) {
+                var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+                elmnt.onmousedown = function(e) {
+                    if (!isResizing && e.target !== document.getElementById("text-content")) {  // Only enable drag if not resizing and not clicking on the text content
+                        dragMouseDown1(e);
+                    }
+                };
+
+                function dragMouseDown1(e) {
+                    e = e || window.event;
+                    e.preventDefault();
+                    // Get the initial mouse position
+                    pos3 = e.clientX;
+                    pos4 = e.clientY;
+                    document.onmouseup = closedragElement1;
+                    document.onmousemove = elementDrag1;
+                }
+
+                function elementDrag1(e) {
+                    e = e || window.event;
+                    e.preventDefault();
+                    // Calculate new cursor position
+                    pos1 = pos3 - e.clientX;
+                    pos2 = pos4 - e.clientY;
+                    pos3 = e.clientX;
+                    pos4 = e.clientY;
+                    // Set the new position of the element
+                    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+                    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+                }
+
+                function closedragElement1() {
+                    document.onmouseup = null;
+                    document.onmousemove = null;
+                }
+            }
+
+            function makeResizable1(elmnt) {
+                const handles = elmnt.querySelectorAll(".resize-handle");
+                const content = document.getElementById("text-content");
+
+                let initialRect = elmnt.getBoundingClientRect();
+                let initialWidth = initialRect.width;
+                let initialFontSize = parseInt(window.getComputedStyle(content).fontSize, 10);
+
+                handles.forEach(function(handle) {
+                    handle.addEventListener("mousedown", function(e) {
+                        e.preventDefault();
+                        isResizing = true;  // Set the resizing flag to true
+                        const rect = elmnt.getBoundingClientRect();
+                        const initialX = e.clientX;
+                        const initialY = e.clientY;
+                        const initialBoxWidth = rect.width;
+                        const initialBoxHeight = rect.height;
+
+                        document.onmousemove = function(e) {
+                            let newWidth, newHeight;
+
+                            // Calculate new width and height based on which handle is being used
+                            if (handle.classList.contains("nw")) {
+                                newWidth = initialBoxWidth - (e.clientX - initialX);
+                                newHeight = initialBoxHeight - (e.clientY - initialY);
+                            } else if (handle.classList.contains("ne")) {
+                                newWidth = initialBoxWidth + (e.clientX - initialX);
+                                newHeight = initialBoxHeight - (e.clientY - initialY);
+                            } else if (handle.classList.contains("sw")) {
+                                newWidth = initialBoxWidth - (e.clientX - initialX);
+                                newHeight = initialBoxHeight + (e.clientY - initialY);
+                            } else if (handle.classList.contains("se")) {
+                                newWidth = initialBoxWidth + (e.clientX - initialX);
+                                newHeight = initialBoxHeight + (e.clientY - initialY);
+                            }
+
+                            // Apply new dimensions to the element
+                            elmnt.style.width = newWidth + "px";
+                            elmnt.style.height = newHeight + "px";
+
+                            // Adjust the font size based on the new width/height ratio
+                            let widthRatio = newWidth / initialWidth;
+                            let newFontSize = initialFontSize * widthRatio;
+                            content.style.fontSize = newFontSize + "px";
+                        };
+
+                        document.onmouseup = function() {
+                            document.onmousemove = null;
+                            document.onmouseup = null;
+                            isResizing = false;  // Reset the resizing flag
+                        };
+                    });
+                });
+            }
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,124 @@
+<html>
+    <head>
+        <title>Dux Avatar Demo</title>
+        <style>
+            /* Add some basic styling to make the Dux image look like an avatar */
+            #dux {
+                position: absolute;
+                top: 0;
+                left: 0;
+                width: 100px;
+                height: 100px;
+                border-radius: 50%;
+                border: 2px solid #ccc;
+                padding: 10px;
+                background-color: #f0f0f0;
+                z-index: 1; /* Ensure Dux image is on top of the background image */
+                cursor: move;
+            }
+            #background {
+                width: 100%;
+                height: 90vh;
+                background-image: url('background.png');
+                background-size: cover;
+                background-position: center;
+            }
+            #talk-box {
+                position: absolute;
+                top: 50%;
+                left: 50%;
+            
+                transform: translate(-50%, -50%);
+                background-color: #fff;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-radius: 10px;
+                width: 600px;
+                z-index: 2; /* Ensure talk box is on top of the Dux image */
+            }
+            #talk-box-header {
+                background-color: #f0f0f0;
+                padding: 5px;
+                border-bottom: 1px solid #ccc;
+                cursor: move;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="background">
+            <img id="dux" src="DuxSilent.jpg" alt="Dux">
+            <div id="talk-box">
+                <div id="talk-box-header" style="background-color:yellow">Click here to move</div>
+                <label for="talk">Say something:</label><br>
+                <input id="talk" name="talk"><br>
+                <button type="button" onclick="speakAndChangeImage();">Speak</button><br>
+            </div>
+        </div>
+        
+        <script src="https://code.responsivevoice.org/responsivevoice.js?key=NVbGYm7d"></script>
+        
+        <script>
+            let x = 0;
+            function speakAndChangeImage() {
+                let text = document.getElementById('talk').value;
+                responsiveVoice.speak(text, null, {
+                    onstart: function() {
+                        document.getElementById("dux").src = 'DuxTalk.gif';
+                        x = 2;
+                    },
+                    onend: function() {
+                        document.getElementById("dux").src = 'DuxSilent.jpg';
+                        x = 0;
+                    }
+                });
+            }
+            
+            // Make the talk box draggable
+            dragElement(document.getElementById("talk-box"));
+
+            // Make the Dux image draggable
+            dragElement(document.getElementById("dux"));
+
+            function dragElement(elmnt) {
+                var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+                if (document.getElementById(elmnt.id + "-header")) {
+                    /* if present, the header is where you move the DIV from:*/
+                    document.getElementById(elmnt.id + "-header").onmousedown = dragMouseDown;
+                } else {
+                    /* otherwise, move the DIV from anywhere inside the DIV:*/
+                    elmnt.onmousedown = dragMouseDown;
+                }
+
+                function dragMouseDown(e) {
+                    e = e || window.event;
+                    e.preventDefault();
+                    // get the mouse cursor position at startup:
+                    pos3 = e.clientX;
+                    pos4 = e.clientY;
+                    document.onmouseup = closeDragElement;
+                    // call a function whenever the cursor moves:
+                    document.onmousemove = elementDrag;
+                }
+
+                function elementDrag(e) {
+                    e = e || window.event;
+                    e.preventDefault();
+                    // calculate the new cursor position:
+                    pos1 = pos3 - e.clientX;
+                    pos2 = pos4 - e.clientY;
+                    pos3 = e.clientX;
+                    pos4 = e.clientY;
+                    // set the element's new position:
+                    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+                    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+                }
+
+                function closeDragElement() {
+                    /* stop moving when mouse button is released:*/
+                    document.onmouseup = null;
+                    document.onmousemove = null;
+                }
+            }
+        </script>
+    </body>
+</html>

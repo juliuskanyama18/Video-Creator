@@ -1,0 +1,634 @@
+  /* Basic styling for the Dux image */
+        body{
+/* 
+            display:grid;
+            grid-template-columns: repeat(1fr 1fr 1fr);
+            grid-template-rows: repeat(1fr 1fr  1fr); */
+        }
+        #background {
+            position: fixed;
+            top: 20%;
+            left: 20%;
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            grid-template-rows: repeat(3, 1fr);
+            gap: 1px;
+            align-items: center;
+
+
+
+            width: 70%;
+            height: 70vh;
+            background-image: url('../background.png');
+            background-size: cover;
+            background-position: center;
+            border: #6b055a solid 2px;
+            z-index: 9999;
+
+
+
+           
+            overflow: hidden;
+           
+        }
+        .mainBar{
+            
+            position: fixed;
+         
+            left: 20%;
+            display: grid;
+        
+            gap: 1px;
+            align-items: center;
+            top:15%;
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            /* grid-template-rows: repeat(3, 1fr); */
+
+            width: 70%;
+            height: 5vh;
+            /* background-image: url('background.png'); */
+            /* background-size: cover; */
+            background-position: center;
+            /* border: #6b055a solid 2px; */
+            z-index: 9999;
+
+
+
+           
+            overflow: hidden; 
+        }
+        .ScriptDiv{
+            -webkit-box-shadow: 8px -7px 24px -20px rgba(66, 68, 90, 1);
+-moz-box-shadow: 8px -7px 24px -20px rgba(66, 68, 90, 1);
+box-shadow: 8px -7px 24px -20px rgba(66, 68, 90, 1);
+
+            position: fixed;
+         /* border-radius: 14%; */
+         left: 20%;
+         display: grid;
+            /* background-color: #6b055a; */
+         gap: 1px;
+         align-items: center;
+         top:12%;
+         /* display: grid;
+         grid-template-columns: repeat(6, 1fr); */
+         border: 1px solid #dbdbdb;
+         /* grid-template-rows: repeat(3, 1fr); */
+            font-size: 19px;
+         width: 67.2%;
+         height: 7vh;
+         /* background-image: url('background.png'); */
+         /* background-size: cover; */
+         /* background-position: center; */
+         /* border: #6b055a solid 2px; */
+         z-index: 9999;
+
+            display: none;
+
+            /* white-space: nowrap;
+            text-overflow: ellipsis; */
+            /* word-wrap: break-word; */
+            vertical-align:middle;
+            text-decoration:none;
+            
+            overflow:auto;
+            border-radius: 6px;
+        
+         /* overflow: none;  */
+        }
+        .Scriptplay{
+
+            cursor: pointer;
+            position: fixed;
+         
+         right: 9.7%;
+         display: grid;
+            background-color: #ffffff;
+         gap: 1px;
+         align-items: center;
+
+         top:11%;
+        
+        border:none;
+            display:none;
+
+         width:2.2%;
+         height: 8vh;
+      
+         z-index: 9999;
+
+        
+            vertical-align:middle;
+            text-decoration:none;
+            
+            overflow:auto;
+
+        }
+        .Scriptplay:hover{
+            background-color: #ffffff;
+        }
+        .AnimationPanelMain{
+
+
+            display: grid;
+            gap: 1px;
+            align-items: center;
+            /* background-color: #081b2d; */
+            /* grid-template-rows: repeat(6, 1fr); */
+            width: 10%;
+            height: 70.4vh;
+            z-index: 9999;
+            position: fixed; /* Fixed positioning */
+            right: 0; /* Align to the right */
+            top: 20%; /* Optional: adjust vertical position */
+         
+            display: none;
+
+           
+        }
+        .leftpanel{
+
+            display: grid;
+            gap: 1px;
+            align-items: center;
+            background-color: #ffffff;
+            /* grid-template-rows: repeat(6, 1fr); */
+            width: 4%;
+            height: 70.5vh;
+            z-index: 9999;
+            position: fixed; /* Fixed positioning */
+            left: 16%; /* Align to the right */
+            top: 20%; /* Optional: adjust vertical position */
+            border-radius: 14px;
+            box-shadow: '1px 8px 24px 0px rgb(217, 218, 226)'
+            
+
+        }
+        .preview{
+
+            display: grid;
+            gap: 1px;
+            align-items: center;
+            background-color: #ffffff;
+            /* grid-template-rows: repeat(6, 1fr); */
+            width: 70%;
+            height: 6.5vh;
+            z-index: 9999;
+            position: fixed; /* Fixed positioning */
+            left: 20%; /* Align to the right */
+            top: 92%; /* Optional: adjust vertical position */
+            border-radius: 14px;
+            -webkit-box-shadow: 8px 8px 24px -13px rgba(66, 68, 90, 1);
+            -moz-box-shadow: 8px 8px 24px -13px rgba(66, 68, 90, 1);
+            box-shadow: 8px 8px 24px -13px rgba(66, 68, 90, 1);
+            cursor: pointer;
+
+
+        }
+        .previewbutton{
+           border: 1px solid 8px 8px 24px -13px rgba(66, 68, 90, 1);;
+        }
+        .input1,.input2,.input3,.input4:focus{
+            border:none;
+            outline: none;
+        }
+        
+.animediv{
+    -webkit-box-shadow: 8px 8px 24px -12px rgba(66, 68, 90, 1);
+-moz-box-shadow: 8px 8px 24px -12px rgba(66, 68, 90, 1);
+box-shadow: 8px 8px 24px -12px rgba(66, 68, 90, 1);
+
+  
+}
+        #dux {
+            width: 250px;
+            height: 250px;
+            border-radius: 50%;
+            /* border: 2px solid #ccc;
+                padding: 1px;
+                background-color: #f0f0f0; */
+            display: grid;
+            grid-column: -1/-2;
+            grid-row: -2/-1;
+            align-self: end;
+            z-index: 1;
+            cursor: move;
+        }
+
+       /* Image box styles */
+#image-box {
+    position: relative;
+    display: inline-block;
+    /* z-index: 4; */
+}
+
+/* Handle styles */
+.imageHandle {
+    position: absolute;
+    width: 8px;
+    height: 8px;
+    background-color: #0e4e46;
+    z-index: 10;
+    opacity: 0;
+}
+
+#image-box:hover .imageHandle{
+opacity: 1;
+
+}
+
+
+
+/* Corner handles */
+#nw { top: -4px; left: -4px; cursor: nw-resize; }
+#ne { top: -4px; right: -4px; cursor: ne-resize; }
+#sw { bottom: -4px; left: -4px; cursor: sw-resize; }
+#se { bottom: -4px; right: -4px; cursor: se-resize; }
+
+/* Edge handles */
+#n { top: -4px; left: 50%; transform: translateX(-50%); cursor: n-resize; }
+#s { bottom: -4px; left: 50%; transform: translateX(-50%); cursor: s-resize; }
+#e { top: 50%; right: -4px; transform: translateY(-50%); cursor: e-resize; }
+#w { top: 50%; left: -4px; transform: translateY(-50%); cursor: w-resize; }
+
+
+
+
+        #draggable-resizable-box {
+            /* grid-column: -1/-4;
+            grid-row: -4/-1; */
+            position: absolute;
+           
+            width: 300px;
+            height: 200px;
+            background-color: #fdeca6;
+            /* border: 2px solid #000; */
+            cursor: move;
+            resize: none;
+            /* To disable native resize */
+            transition: 300ms padding;
+        }
+
+
+        /* Resizable handles using data attributes */
+        #draggable-resizable-box [data-resize] {
+            background-color: #0e4e46;
+            position: absolute;
+            width: 6px;
+            height: 6px;
+            z-index: 0;
+            opacity: 0;
+          
+
+            transition: 300ms all;
+        }
+
+        #draggable-resizable-box:hover [data-resize] {
+            margin:3px;
+        }
+
+        #draggable-resizable-box:hover {
+            cursor: all-scroll;
+
+            padding: 1px;
+            
+
+        }
+
+
+        /* Positioning the resize handles at the corners and edges */
+        [data-resize="nw"] {
+            top: -4px;
+            left: -4px;
+            cursor: nw-resize;
+            margin: 4;
+        }
+
+        [data-resize="ne"] {
+            top: -4px;
+            right: -4px;
+            cursor: ne-resize;
+        }
+
+        [data-resize="sw"] {
+            bottom: -4px;
+            left: -4px;
+            cursor: sw-resize;
+        }
+
+        [data-resize="se"] {
+            bottom: -4px;
+            right: -4px;
+            cursor: se-resize;
+        }
+
+        [data-resize="n"] {
+            top: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            cursor: n-resize;
+        }
+
+        [data-resize="s"] {
+            bottom: -4px;
+            left: 50%;
+            transform: translateX(-50%);
+            cursor: s-resize;
+        }
+
+        [data-resize="e"] {
+            right: -4px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: e-resize;
+        }
+
+        [data-resize="w"] {
+            left: -4px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: w-resize;
+        }
+
+        #talk-box {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: #fff;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            width: 600px;
+            z-index: 0;
+        }
+
+        #talk-box-header {
+            background-color: #f0f0f0;
+            padding: 5px;
+            border-bottom: 1px solid #ccc;
+            cursor: move;
+            height: 73px;
+        }
+
+        /* Styling for draggable and resizable div */
+
+
+        /*text */
+
+        #text-box {
+            position: absolute;
+            top: 30%;
+            left: 30%;
+            /* width: 300px;
+            height: 100px; */
+            padding: 13px;
+
+            background-color: transparent;
+            border: 2px solid #fafafa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 20px;
+            /* Initial font size */
+            text-align: center;
+            resize: none;
+            /* To disable native resize */
+            z-index: 99;
+            border: none;
+
+            transition: 300ms padding;
+        }
+
+        #text-box:hover {
+            cursor: all-scroll;
+            transform: scale(0.96);
+            /* border: 1px solid #081b2d; */
+
+        }
+
+        #text-box .resize-handle {
+            margin: 4;
+            opacity: 0;
+            transition: 300ms all;
+        }
+
+        #text-box:hover .resize-handle {
+           
+            margin: 3;
+        }
+
+        .resize-handle {
+            position: absolute;
+            width: 7px;
+            height: 7px;
+            background-color: #06615c;
+            z-index: 4;
+        }
+
+        [contenteditable]:focus {
+            outline: 0px solid transparent;
+        }
+
+        #text-content {
+
+            border-radius: 70%;
+        }
+
+        /* Positioning the resize handles */
+        /* .resize-handle.nw1 { top: -4px; left: -4px; cursor: nw-resize; }
+        .resize-handle.ne1 { top: -4px; right: -4px; cursor: ne-resize; }
+        .resize-handle.sw1 { bottom: -4px; left: -4px; cursor: sw-resize; }
+        .resize-handle.se1 { bottom: -4px; right: -4px; cursor: se-resize; } */
+
+
+
+
+        /*end of text resize handle */
+
+
+        /* image */
+
+
+        .resize-handle {
+    position: absolute;
+    width: 5px; /* Adjust size as needed */
+    height: 5px;
+    background-color: #081b2d;
+    z-index: 4;
+    margin: -5px; /* Offset for better placement */
+}
+
+/* Positioning the resize handles */
+.resize-handle.nw {
+    top: -5px;
+    left: -5px;
+    cursor: nw-resize;
+}
+
+.resize-handle.ne {
+    top: -5px;
+    right: -5px;
+    cursor: ne-resize;
+}
+
+.resize-handle.sw {
+    bottom: -5px;
+    left: -5px;
+    cursor: sw-resize;
+}
+
+.resize-handle.se {
+    bottom: -5px;
+    right: -5px;
+    cursor: se-resize;
+}
+
+.resize-handle.n {
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: n-resize;
+}
+
+.resize-handle.s {
+    bottom: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    cursor: s-resize;
+}
+
+.resize-handle.e {
+    top: 50%;
+    right: -5px;
+    transform: translateY(-50%);
+    cursor: e-resize;
+}
+
+.resize-handle.w {
+    top: 50%;
+    left: -5px;
+    transform: translateY(-50%);
+    cursor: w-resize;
+}
+
+
+        #image-content {
+            /* display: grid;
+            grid-column: -5/-3;
+            width: 200%; /* Set smaller default width */
+            /* Set smaller default height */
+            width: 100%;
+            height: 100%;
+
+        }
+
+        #image-content:hover {
+            /* display: grid;
+            grid-column: -5/-3;
+            width: 200%; /* Set smaller default width */
+            /* Set smaller default height */
+            border: 1px solid #081b2d;
+
+
+        }
+
+        #image-box {}
+
+        #speakButton {}
+
+        .clone{
+
+            border:none;
+
+        }
+
+
+        .clone:hover .resize-handle{
+
+            
+
+            
+           
+           
+
+        }
+        .clonehandle {
+            
+    background-color: #eaf5f3;
+    /* cursor: pointer; */
+    opacity: 0;
+}
+
+.clone:hover .resize-handle {
+
+    opacity: 0;
+}
+.clone:hover .dataresize {
+
+  
+ 
+}
+.popup{
+    /* background-image: url('background.png'); */
+    background-color: white;
+}
+.closepopup:hover{
+
+    transition-timing-function: ease-in;
+    transform: scale(0.7);
+}
+
+
+
+
+
+
+
+.color-picker-container:hover {
+                position: relative;
+                display: inline-block;
+           width: 100px;
+            }
+    
+         
+    
+            .color-popup {
+                /* display: none; Hide the color input by default */
+                opacity: 0;
+               
+             
+              
+            }
+            
+
+            .color-picker-container:hover {
+
+
+}
+    
+    
+.clone   .resize-handle{
+
+   
+    margin:0px;
+    display:none;
+
+
+}
+.clone{
+
+    border: none;
+}
+           
+#text-box {
+
+    
+   
+}
+
+.clone {
+    /* -webkit-text-size-adjust: auto; /* or none */
+    /* text-size-adjust: auto; or none */ 
+}

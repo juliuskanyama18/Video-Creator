@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Resizable Draggable Image</title>
+    <style>
+        #image-box {
+            position: absolute;
+            top: 50px;
+            left: 50px;
+            width: 100px; /* Smaller default width */
+            height: 75px; /* Smaller default height */
+            padding: 10px;
+            background-color: transparent;
+            border: 2px solid #fafafa;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            resize: none; /* To disable native resize */
+            z-index: 3;
+            border: none;
+        }
+        #image-box:hover {
+            cursor: all-scroll;
+        }
+
+        .resize-handle {
+            position: absolute;
+            width: 5px;
+            height: 5px;
+            background-color: #06615c;
+            z-index: 4;
+        }
+
+        /* Positioning the resize handles */
+        .resize-handle.nw { top: -5px; left: -5px; cursor: nw-resize; }
+        .resize-handle.ne { top: -5px; right: -5px; cursor: ne-resize; }
+        .resize-handle.sw { bottom: -5px; left: -5px; cursor: sw-resize; }
+        .resize-handle.se { bottom: -5px; right: -5px; cursor: se-resize; }
+
+        #image-content {
+            width: 100px; /* Set smaller default width */
+            height: 75px; /* Set smaller default height */
+        }
+    </style>
+</head>
+<body>
+    <input type="file" id="imageUpload" accept="image/*" />
+    <div id="image-box">
+        <img id="image-content" style="cursor: auto;" />
+        <!-- Resizable handles -->
+        <div class="resize-handle nw"></div>
+        <div class="resize-handle ne"></div>
+        <div class="resize-handle sw"></div>
+        <div class="resize-handle se"></div>
+    </div>
+
+    <script>
+        document.getElementById("imageUpload").addEventListener("change", function() {
+            const file = this.files[0];
+            const reader = new FileReader();
+
+            reader.onload = function(e) {
+                document.getElementById("image-content").src = e.target.result;
+                makeResizable2AndDraggable2(document.getElementById("image-box"));
+            };
+
+            if (file) {
+                reader.readAsDataURL(file);
+            }
+        });
+
+        function makeResizable2AndDraggable2(elmnt) {
+            let isResizing = false;    // Variable to track if resizing is active
+
+            // Make the element draggable, only if it's not resizing
+            dragElement(elmnt);
+
+            // Add resizing functionality
+            makeResizable2(elmnt);
+
+            function dragElement(elmnt) {
+                var pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+
+                elmnt.onmousedown = function(e) {
+                    if (!isResizing) {  // Only enable drag if not resizing
+                        dragMouseDown2(e);
+                    }
+                };
+
+                function dragMouseDown2(e) {
+                    e = e || window.event;
+                    e.preventDefault();
+                    // Get the initial mouse position
+                    pos3 = e.clientX;
+                    pos4 = e.clientY;
+                    document.onmouseup = closedragElement;
+                    document.onmousemove = elementDrag;
+                }
+
+                function elementDrag(e) {
+                    e = e || window.event;
+                    e.preventDefault();
+                    // Calculate new cursor position
+                    pos1 = pos3 - e.clientX;
+                    pos2 = pos4 - e.clientY;
+                    pos3 = e.clientX;
+                    pos4 = e.clientY;
+                    // Set the new position of the element
+                    elmnt.style.top = (elmnt.offsetTop - pos2) + "px";
+                    elmnt.style.left = (elmnt.offsetLeft - pos1) + "px";
+                }
+
+                function closedragElement() {
+                    document.onmouseup = null;
+                    document.onmousemove = null;
+                }
+            }
+
+            function makeResizable2(elmnt) {
+                const handles = elmnt.querySelectorAll(".resize-handle");
+                const content = document.getElementById("image-content");
+
+                let initialRect = elmnt.getBoundingClientRect();
+                let initialWidth = initialRect.width;
+                let initialHeight = initialRect.height;
+
+                handles.forEach(function(handle) {
+                    handle.addEventListener("mousedown", function(e) {
+                        e.preventDefault();
+                        isResizing = true;  // Set the resizing flag to true
+                        const rect = elmnt.getBoundingClientRect();
+                        const initialX = e.clientX;
+                        const initialY = e.clientY;
+                        const initialBoxWidth = rect.width;
+                        const initialBoxHeight = rect.height;
+
+                        document.onmousemove = function(e) {
+                            let newWidth, newHeight;
+
+                            // Calculate new width and height based on which handle is being used
+                            if (handle.classList.contains("nw")) {
+                                newWidth = initialBoxWidth - (e.clientX - initialX);
+                                newHeight = initialBoxHeight - (e.clientY - initialY);
+                            } else if (handle.classList.contains("ne")) {
+                                newWidth = initialBoxWidth + (e.clientX - initialX);
+                                newHeight = initialBoxHeight - (e.clientY - initialY);
+                            } else if (handle.classList.contains("sw")) {
+                                newWidth = initialBoxWidth - (e.clientX - initialX);
+                                newHeight = initialBoxHeight + (e.clientY - initialY);
+                            } else if (handle.classList.contains("se")) {
+                                newWidth = initialBoxWidth + (e.clientX - initialX);
+                                newHeight = initialBoxHeight + (e.clientY - initialY);
+                            }
+
+                            // Apply new dimensions to the element
+                            elmnt.style.width = newWidth + "px";
+                            elmnt.style.height = newHeight + "px";
+
+                            // Update the image size
+                            content.style.width = newWidth + "px";
+                            content.style.height = newHeight + "px";
+                        };
+
+                        document.onmouseup = function() {
+                            document.onmousemove = null;
+                            document.onmouseup = null;
+                            isResizing = false;  // Reset the resizing flag
+                        };
+                    });
+                });
+            }
+        }
+    </script>
+</body>
+</html>

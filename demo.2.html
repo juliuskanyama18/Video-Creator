@@ -1,0 +1,139 @@
+<html>
+
+<head>
+    <!-- <title>Dux Avatar Demo</title> -->
+     <link rel="stylesheet" href="css/index.css" >
+    <script src="https://code.responsivevoice.org/responsivevoice.js?key=jhq4Td0o"></script>
+
+    <style>
+      
+
+    </style>
+</head>
+
+<body>
+
+    <div id="mainBar" class="mainBar" style="display: none;"></div>
+   
+    <div id="AnimationPanelMain" class="AnimationPanelMain" > </div>
+
+    <div id="leftPanel" class="leftpanel" > </div>
+    <div id="ScriptDiv" class="ScriptDiv" contenteditable="true" aria-placeholder="Script Text"> 
+
+       
+
+    </div>
+    <div id="Scriptplay" class="Scriptplay"> <img src="images/icon/fi-rr-caret-right.svg" style="width:25px">
+    </div>
+
+    <div id="preview" class="preview">
+        <img src="images/icon/preview.png" id="previewbutton" class="previewbutton" height="20px" width="20px">
+      
+    </div>
+
+
+    <div id="background">
+
+        <div id="dux" class="dux">
+            <img id="dux" src="images/DuxProHiddle.gif" alt="Dux" style="margin-left: 38px;margin-top: 12px;">
+        </div>
+        
+
+
+
+        <div id="talk-box" style="display:none">
+            <!-- <div id="talk-box-header" style="background-color:#f7b602">Click here to move</div> -->
+            <!-- <textarea rows="2" cols="78" id="talk" placeholder="Type your text here..."></textarea> -->
+            <button type="button" id="speakButton" onclick="speakAndChangeImage();">Speak</button><br>
+        </div>
+        <!-- New draggable and resizable box -->
+
+
+
+        <div id="image-box">
+            <img src="images/Grid.png" id="image-content" style="cursor: all-scroll;" />
+            <!-- Resizable handles -->
+            <div id="nw" class="imageHandle"></div>
+            <div id="ne" class="imageHandle"></div>
+            <div id="sw" class="imageHandle"></div>
+            <div id="se" class="imageHandle"></div>
+            <div id="n" class="imageHandle"></div>
+            <div id="s" class="imageHandle"></div>
+            <div id="e" class="imageHandle"></div>
+            <div id="w" class="imageHandle"></div>
+        </div>
+        
+
+      
+
+
+
+        <div id="text-box" class="parent">
+            <div id="text-content" class="child" style="cursor: auto;" contenteditable="true">I'm Near East Video Editor</div>
+          
+            <div class="resize-handle nw"></div>
+            <div class="resize-handle ne"></div>
+            <div class="resize-handle sw"></div>
+            <div class="resize-handle se"></div>
+            <div class="resize-handle n"></div>
+            <div class="resize-handle s"></div>
+            <div class="resize-handle e"></div>
+            <div class="resize-handle w"></div>
+        </div>
+
+
+        <div id="draggable-resizable-box" class="box">
+            <div class="dataresize" data-resize="nw"></div>
+            <div class="dataresize" data-resize="ne"></div>
+            <div class="dataresize" data-resize="sw"></div>
+            <div class="dataresize" data-resize="se"></div>
+            <div class="dataresize" data-resize="n"></div>
+            <div class="dataresize" data-resize="s"></div>
+            <div class="dataresize" data-resize="e"></div>
+            <div class="dataresize" data-resize="w"></div>
+        </div>
+
+        <!-- <div id="colorDisplay1" class="colorDisplay" style="background-color: #0e4e46;width: 34px;">Hello World</div> -->
+<div class="color-popup">
+    <input type="color" id="color-picker" class="color-picker"/>
+</div>
+
+    </div>
+
+
+
+
+
+    
+
+
+
+
+
+
+
+   
+
+
+    <input type="file" id="imageUpload" accept="image/*" />
+
+
+
+    <!-- <script src="https://code.responsivevoice.org/responsivevoice.js?key=NVbGYm7d"></script> -->
+
+    <script src="js/div.js " > </script>
+    <script src="js/textbox.js " > </script>
+    <script src="js/image.js" > </script>
+
+    <script src="js/clone.js " > </script>
+    <script src="js/popup.js " > </script>
+    <script src="js/menubar.js " > </script>
+    <script src="js/clickhandle.js" ></script>
+    <script src="js/AniamationPanel.js" ></script>
+    
+    <script src="js/leftPanel.js" ></script>
+    <script src="js/speak.js" ></script>
+    <script src="js/previews.js" ></script>
+</body>
+
+</html>
