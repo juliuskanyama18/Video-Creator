@@ -684,16 +684,13 @@ setTimeout(()=>{
         thriddiv.addEventListener('click', function(e) {
     e.preventDefault();
 
+  
+    
     if (selectedElement) {
-        // Set hoveredElement to the selectedElement
-        hoveredElement = selectedElement;
-
         // Call the DublicateElement function
-        DublicateElement();
-
-        // Log the action for debugging
-        console.log("Element Dublicated:", selectedElement);
-    } else {
+        DublicateElement()
+    }
+     else {
         console.log("No element selected to Dublicate");
     }
 });

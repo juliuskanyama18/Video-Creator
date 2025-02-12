@@ -6,7 +6,7 @@ let textBoxhandle = textBox1.querySelectorAll('.resize-handle'); // Use class se
 
 let boxclass=document.querySelector(".box")
 let thisdiv = box.querySelectorAll('[data-resize]');
-// let boxclone=document.querySelector("clone")
+let boxclone=document.querySelector("clone")
 
 // Function to show resize handles
 function showdivresizehandle(event) {

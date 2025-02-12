@@ -1,6 +1,8 @@
 const background = document.getElementById('background');
 let hoveredElement = null;
 let activeElement = null; // Track the currently active element
+let clonedboxclass = document.querySelectorAll('[id^="draggable-resizable-box-copy-"]');
+let clonedtextbox1 = document.querySelectorAll('[id^="text-box-copy-"]');
 
 // Utility function to make elements draggable and resizable
 const makeDraggableAndResizable = (element) => {
@@ -192,8 +194,8 @@ const makeDraggableAndResizable = (element) => {
 
 // Dublicate and initialize functionality for new elements
 const DublicateElement = () => {
-   let element = hoveredElement;
-   console.log("hovered element: ", element)
+   let element = IsselectedElement ;
+//    console.log("duplicated: ", element)
 
     // if (element && element.id !== "background") {
     if (element) {
@@ -220,9 +222,11 @@ const DublicateElement = () => {
         clone.style.opacity = computedStyle.opacity; // Copy opacity
         clone.style.backgroundColor = computedStyle.backgroundColor; // Copy background color
         clone.style.color = computedStyle.color; // Copy text color
-        clone.style.border = computedStyle.border; // Copy border styles
+        clone.style.border = computedStyle.border; // Add border to the clone
         clone.style.fontSize = computedStyle.fontSize;
-
+        
+       
+        
         background.appendChild(clone);
 
             // Attach the click event listener to the cloned text box
@@ -243,7 +247,7 @@ const DublicateElement = () => {
             };
 
             makeDraggableAndResizable(clone); // Reinitialize draggable and resizable functionality
-            IsselectedElement = clone;
+            // IsselectedElement = clone;
 
 
             // Add 8 resizing handles dynamically if not present
@@ -265,16 +269,16 @@ const DublicateElement = () => {
                         handle.style.left = '-7px';
                         break;
                     case 'ne':
-                        handle.style.top = '-7px';
-                        handle.style.right = '-7px';
+                        handle.style.top = '-5px';
+                        handle.style.right = '-5px';
                         break;
                     case 'sw':
-                        handle.style.bottom = '-7px';
-                        handle.style.left = '-7px';
+                        handle.style.bottom = '-5px';
+                        handle.style.left = '-5px';
                         break;
                     case 'se':
-                        handle.style.bottom = '-7px';
-                        handle.style.right = '-7px';
+                        handle.style.bottom = '-5px';
+                        handle.style.right = '-5px';
                         break;
                     case 'n':
                         handle.style.top = '-7px';
@@ -298,12 +302,11 @@ const DublicateElement = () => {
                         break;
                 }
                 clone.appendChild(handle);
-
                 hideResizeHandles(); // Hide the text box resize handles
                 hidedivresizehandle(); // Hide the box resize handles
                 showHandles(clone); // Show handles for the clicked clone
-
                 hideAllHandles(activeElement);
+                // showdivresizehandle(clone);
                     // if(element){
                     //     showHandles()
 
@@ -327,21 +330,24 @@ const DublicateElement = () => {
             // Add click event listener to manage active element
             clone.addEventListener('click', (e) => {
                 e.stopPropagation(); // Prevent event from propagating to the background
-
                 hideResizeHandles(); // Hide the text box resize handles
                 hidedivresizehandle(); // Hide the box resize handles
-
-                mainBar.style.display = 'grid';
-                ScriptDiv.style.display='none'
-                Scriptplay.style.display='none'
-                // IsselectedElement = activeElement;
-                
                 if (activeElement && activeElement !== clone) {
                     hideAllHandles(activeElement); // Hide handles of the previously active element
                 }
+                mainBar.style.display = 'grid';
+                ScriptDiv.style.display='none'
+                Scriptplay.style.display='none'
                 showHandles(clone); // Show handles for the clicked clone
                 activeElement = clone; // Update the active element
+                // if (!element) {
+                    // clone.style.border = '1px solid #081b2d';
+                // }
+                // alert("clicked");
+                // IsselectedElement = activeElement;   
             });
+            IsselectedElement = clone;
+                console.log("Duplicated Element: ", IsselectedElement )
         }
     }
 };
@@ -362,7 +368,7 @@ const hideAllHandles = (element) => {
 const showHandles = (element) => {
     if (element) {
 
-        if(!element){
+        if (element && element.id.startsWith('draggable-resizable-box-copy-')){
 
              element.style.border = '1px solid #081b2d';
 
