@@ -330,7 +330,7 @@ document.addEventListener('click',function(e){
     animationpanel.style.transition='transform 0.6s ease-in-out'
     let previewbutton=document.getElementById("previewbutton")
 
-    if(!AnimationPanelMain.contains(e.target) &&( !animediv.contains(e.target) &&(!AnimationPanelMain.contains(e.target)) && (!preview.contains(e.target))  )){
+    if(!AnimationPanelMain.contains(e.target) &&( !animediv.contains(e.target) &&(!AnimationPanelMain.contains(e.target)) && (!preview.contains(e.target)) &&(!popup.contains(e.target))  )){
 
         animationpanel.style.transition='transform 0.6s ease-in-out'
         animationpanel.style.transform = 'translateX(100%)'; // Move it out of view

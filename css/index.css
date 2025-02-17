@@ -290,10 +290,6 @@ opacity: 1;
 
         #draggable-resizable-box:hover {
             cursor: all-scroll;
-
-            padding: 1px;
-            
-
         }
 
 
@@ -423,7 +419,7 @@ opacity: 1;
             position: absolute;
             width: 7px;
             height: 7px;
-            background-color: #06615c;
+            background-color: #010c05;
             z-index: 4;
         }
 
@@ -620,6 +616,7 @@ opacity: 1;
 .clone{
 
     border: none;
+    
 }
            
 #text-box {

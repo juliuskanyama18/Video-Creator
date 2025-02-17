@@ -115,7 +115,15 @@ const box = document.getElementById('draggable-resizable-box');
     
         makeDraggableAndResizable1(box);
  
-
+        box.addEventListener('mouseover', () => {
+            box.style.transform = 'scale(0.95)';
+            box.style.transition = 'transform 0.4s ease';
+        });
+        box.addEventListener('mouseout', () => {
+           
+            box.style.transform = 'scale(1.00)';
+            box.style.transition = 'transform 0.4s ease';
+        });
 
        
    
