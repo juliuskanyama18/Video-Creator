@@ -418,6 +418,9 @@ input11.addEventListener('input', function () {
             animationSettings[IsselectedElement.id] = {}; // Initialize it if undefined
         }
         animationSettings[IsselectedElement.id].timer = newTimer; // Save the new timer value
+        input22.value = "0.5"; // Default timer for "down"
+        input33.value = "0.5"; // Default timer for "right"
+        input44.value = "0.5"; // Default timer for "down"
     }
 });
 
@@ -477,6 +480,9 @@ input22.addEventListener('input', function () {
             animationSettings[IsselectedElement.id] = {}; // Initialize it if undefined
         }
         animationSettings[IsselectedElement.id].timer = newTimer;
+        input11.value = "0.5"; // Default timer for "down"
+        input33.value = "0.5"; // Default timer for "right"
+        input44.value = "0.5"; // Default timer for "down"
     }
 });
 
@@ -534,6 +540,10 @@ rightdiv.addEventListener("click", function () {
             timer: transitionDuration,
             direction: 'right', // Use correct property name
         };
+
+        input11.value = "0.5"; // Default timer for "down"
+        input22.value = "0.5"; // Default timer for "right"
+        input44.value = "0.5"; // Default timer for "down"
 
         // Reset the element's transform and transition before applying the animation
         IsselectedElement.style.transition = "none"; // Disable transition temporarily
@@ -626,6 +636,11 @@ rightleft.addEventListener("click", function () {
             timer: transitionDuration,
             direction: 'left', // Use correct property name
         };
+
+        input11.value = "0.5"; // Default timer for "down"
+        input22.value = "0.5"; // Default timer for "right"
+        input33.value = "0.5"; // Default timer for "down"
+
         // Reset the element's transform and transition before applying the animation
         IsselectedElement.style.transition = "none"; // Disable transition to reset
         IsselectedElement.style.transform = "translateX(50px)"; // Set to right position
