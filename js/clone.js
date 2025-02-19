@@ -123,8 +123,8 @@ const DublicateElement = () => {
         const clone = element.cloneNode(true);
         clone.setAttribute("class", "clone");
         clone.style.position = "absolute";
-        clone.style.left = `${element.offsetLeft + 10}px`;
-        clone.style.top = `${element.offsetTop + 10}px`;
+        clone.style.left = `${element.offsetLeft + 30}px`;
+        clone.style.top = `${element.offsetTop + 30}px`;
         clone.style.zIndex = "10";
         clone.id = `${element.id}-copy-${Date.now()}`; // Create a unique ID
 
@@ -132,8 +132,8 @@ const DublicateElement = () => {
         const computedStyle = getComputedStyle(element);
         clone.style.width = computedStyle.width;
         clone.style.height = computedStyle.height;
-        clone.style.top = computedStyle.top;
-        clone.style.left = computedStyle.left;
+        // clone.style.top = computedStyle.top;
+        // clone.style.left = computedStyle.left;
         clone.style.opacity = computedStyle.opacity; // Copy opacity
         clone.style.backgroundColor = computedStyle.backgroundColor; // Copy background color
         clone.style.padding = computedStyle.padding;

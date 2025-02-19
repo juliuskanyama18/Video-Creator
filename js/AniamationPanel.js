@@ -353,6 +353,8 @@ let input11=document.getElementById("input1")
 // Object to store animation settings for each element
 const animationSettings = {};
 
+
+
 // Function to handle element selection
 function selectElement(element) {
     IsselectedElement = element;
@@ -410,7 +412,12 @@ input11.addEventListener('input', function () {
     if (IsselectedElement) {
         // Save the new timer value for the selected element
         const newTimer = parseFloat(input11.value) || 0.5;
-        animationSettings[IsselectedElement.id].timer = newTimer;
+
+        // Ensure the animationSettings object exists for the selected element
+        if (!animationSettings[IsselectedElement.id]) {
+            animationSettings[IsselectedElement.id] = {}; // Initialize it if undefined
+        }
+        animationSettings[IsselectedElement.id].timer = newTimer; // Save the new timer value
     }
 });
 
@@ -465,6 +472,10 @@ input22.addEventListener('input', function () {
     if (IsselectedElement) {
         // Save the new timer value for the selected element
         const newTimer = parseFloat(input22.value) || 0.5;
+        // Ensure the animationSettings object exists for the selected element
+        if (!animationSettings[IsselectedElement.id]) {
+            animationSettings[IsselectedElement.id] = {}; // Initialize it if undefined
+        }
         animationSettings[IsselectedElement.id].timer = newTimer;
     }
 });

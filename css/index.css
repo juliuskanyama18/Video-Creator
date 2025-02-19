@@ -60,8 +60,8 @@
         }
         .ScriptDiv{
             -webkit-box-shadow: 8px -7px 24px -20px rgba(66, 68, 90, 1);
--moz-box-shadow: 8px -7px 24px -20px rgba(66, 68, 90, 1);
-box-shadow: 8px -7px 24px -20px rgba(66, 68, 90, 1);
+            -moz-box-shadow: 8px -7px 24px -20px rgba(66, 68, 90, 1);
+            box-shadow: 8px -7px 24px -20px rgba(66, 68, 90, 1);
 
             position: fixed;
          /* border-radius: 14%; */
@@ -262,6 +262,8 @@ opacity: 1;
            
             width: 300px;
             height: 200px;
+            top: 199px;
+            left: 356px;
             background-color: #fdeca6;
             /* border: 2px solid #000; */
             cursor: move;
@@ -375,10 +377,10 @@ opacity: 1;
 
         #text-box {
             position: absolute;
-            top: 30%;
-            left: 30%;
-            /* width: 300px;
-            height: 100px; */
+            top: 0px;
+            left: 360px;
+             /* width: 300px; */
+            /* height: 100px; */ 
             padding: 13px;
 
             background-color: transparent;
