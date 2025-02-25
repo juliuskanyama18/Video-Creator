@@ -34,16 +34,12 @@ updiv.style.gridRow='-9/-8 '
 updiv.style.cursor='pointer'
 animationpanel.appendChild(updiv)
 
-updiv.addEventListener("mouseenter",function(e){
 
-    updiv.style.transform='scale(0.94)'
-    updiv.style.transition='transform 0.5s ease'
-    // updiv.style.border='1px solid blue'
-})
-updiv.addEventListener("mouseleave",function(e){
-    updiv.style.transform='scale(1)'
-    updiv.style.transition='transform 0.5s ease'
-})
+
+// updiv.addEventListener("mouseleave",function(e){
+//     updiv.style.transform='scale(1)'
+//     updiv.style.transition='transform 0.5s ease'
+// })
 
 let iconUp1=document.createElement("img")
 iconUp1.src="images/icon/fi-rr-caret-up.svg"
@@ -108,11 +104,10 @@ downdiv.addEventListener("mouseenter",function(e){
     // downdiv.style.border='1px solid blue'
 })
 
-downdiv.addEventListener("mouseleave",function(e){
-
-    downdiv.style.transform='scale(1)'
-    downdiv.style.transition='transform 0.5s ease'
-})
+// downdiv.addEventListener("mouseleave",function(e){
+//     downdiv.style.transform='scale(1)'
+//     downdiv.style.transition='transform 0.5s ease'
+// })
 
 let icondown=document.createElement("img")
 icondown.src="images/icon/fi-rr-caret-down.svg"
@@ -186,10 +181,10 @@ rightdiv.addEventListener("mouseenter",function(e){
 
 })
 
-rightdiv.addEventListener("mouseleave",function(e){
-    rightdiv.style.transform='scale(1)'
-    rightdiv.style.transition='transform 0.5s ease'
-})
+// rightdiv.addEventListener("mouseleave",function(e){
+//     rightdiv.style.transform='scale(1)'
+//     rightdiv.style.transition='transform 0.5s ease'
+// })
 
 let iconright=document.createElement("img")
 iconright.src="images/icon/fi-rr-caret-right.svg"
@@ -268,14 +263,10 @@ rightleft.addEventListener("mouseenter",function(e){
     
 })
 
-rightleft.addEventListener("mouseleave",function(e){
-
-    rightleft.style.transform='scale(1)'
-    rightleft.style.transition='transform 0.5s ease'
-    
-
-
-})
+// rightleft.addEventListener("mouseleave",function(e){
+//     rightleft.style.transform='scale(1)'
+//     rightleft.style.transition='transform 0.5s ease'
+// })
 
 let iconLeft=document.createElement("img")
 iconLeft.src="images/icon/fi-rr-caret-left.svg"
@@ -329,8 +320,8 @@ rightleft.appendChild(input4);
 document.addEventListener('click',function(e){
     animationpanel.style.transition='transform 0.6s ease-in-out'
     let previewbutton=document.getElementById("previewbutton")
-
-    if(!AnimationPanelMain.contains(e.target) &&( !animediv.contains(e.target) &&(!AnimationPanelMain.contains(e.target)) && (!preview.contains(e.target)) &&(!popup.contains(e.target))  )){
+    
+    if(!AnimationPanelMain.contains(e.target) &&( !animediv.contains(e.target)  && (!preview.contains(e.target)) &&(!popup.contains(e.target))  )){
 
         animationpanel.style.transition='transform 0.6s ease-in-out'
         animationpanel.style.transform = 'translateX(100%)'; // Move it out of view
@@ -357,7 +348,7 @@ const animationSettings = {};
 
 // Function to handle element selection
 function selectElement(element) {
-    IsselectedElement = element;
+    IsselectedElement = element; // Store the selected element in a global variable
     // Get the stored timer for the selected element or default to 0.5 seconds
     const timer = animationSettings[element.id]?.timer || 0.5;
     // Update the timer input to show the stored value
@@ -385,8 +376,6 @@ updiv.addEventListener('click', function () {
             direction: "up", // Add direction here
         };
 
-        
-
         // Reset the element's transform and transition before applying the animation
        selectedElement.style.transition = "none";
         selectedElement.style.transform = "translateY(50px)"; // Set to below position
@@ -411,6 +400,33 @@ updiv.addEventListener('click', function () {
     //     console.log("No element selected for animation.");
     // }
 });
+
+
+// Handle "mouseenter" for down animation
+updiv.addEventListener("mouseenter", function () {
+    if (IsselectedElement) {
+        let selectedElement = IsselectedElement; // Store reference to prevent loss of context
+
+        let transitionDuration = parseFloat(input22.value);
+        transitionDuration = isNaN(transitionDuration) ? 0.5 : transitionDuration;
+
+        selectedElement.style.transition = "none";
+        selectedElement.style.transform = "translateY(50px)";
+
+
+        void selectedElement.offsetHeight;
+
+        selectedElement.style.opacity = '0.4';
+        selectedElement.style.transition = `transform ${transitionDuration}s ease`;
+        selectedElement.style.transform = "translateY(0)";
+
+        setTimeout(() => {
+            selectedElement.style.opacity = '1';
+            selectedElement.style.transition = `opacity ${transitionDuration}s ease, visibility ${transitionDuration}s ease`;
+        }, transitionDuration * 1000);
+    }
+});
+
 
 // Update timer value dynamically when an element is selected
 input11.addEventListener('input', function () {
@@ -498,32 +514,34 @@ input22.addEventListener('input', function () {
 // Handle "mouseenter" for down animation
 downdiv.addEventListener("mouseenter", function () {
     if (IsselectedElement) {
+        let selectedElement = IsselectedElement; // Store reference to prevent loss of context
+
         let transitionDuration = parseFloat(input22.value);
         transitionDuration = isNaN(transitionDuration) ? 0.5 : transitionDuration;
 
-        IsselectedElement.style.transition = "none";
-        IsselectedElement.style.transform = "translateY(-50px)";
+        selectedElement.style.transition = "none";
+        selectedElement.style.transform = "translateY(-50px)";
 
-        void IsselectedElement.offsetHeight;
+        void selectedElement.offsetHeight;
 
-        IsselectedElement.style.opacity = '0.4';
-        IsselectedElement.style.transition = `transform ${transitionDuration}s ease`;
-        IsselectedElement.style.transform = "translateY(0)";
+        selectedElement.style.opacity = '0.4';
+        selectedElement.style.transition = `transform ${transitionDuration}s ease`;
+        selectedElement.style.transform = "translateY(0)";
 
         setTimeout(() => {
-            IsselectedElement.style.opacity = '1';
-            IsselectedElement.style.transition = `opacity ${transitionDuration}s ease, visibility ${transitionDuration}s ease`;
+            selectedElement.style.opacity = '1';
+            selectedElement.style.transition = `opacity ${transitionDuration}s ease, visibility ${transitionDuration}s ease`;
         }, transitionDuration * 1000);
     }
 });
 
 // Handle "mouseleave" for down animation
-downdiv.addEventListener("mouseleave", function () {
-    if (IsselectedElement) {
-        IsselectedElement.style.transition = "transform 0.5s ease";
-        IsselectedElement.style.transform = "translateY(0)";
-    }
-});
+// downdiv.addEventListener("mouseleave", function () {
+//     if (IsselectedElement) {
+//         IsselectedElement.style.transition = "transform 0.5s ease";
+//         IsselectedElement.style.transform = "translateY(0)";
+//     }
+// });
 
 
 
@@ -584,26 +602,28 @@ rightdiv.addEventListener("click", function () {
 
 rightdiv.addEventListener("mouseenter", function () {
     if (IsselectedElement) {
+        let selectedElement = IsselectedElement; // Store reference to prevent loss of context
+
         // Get the value from input33 to determine the transition duration
         let transitionDuration = parseFloat(input33.value); // Get the value as a float
         transitionDuration = isNaN(transitionDuration) ? 0.5 : transitionDuration; // Default to 0.5s if not valid
 
         // Reset the element's transform and transition before applying the animation
-        IsselectedElement.style.transition = "none"; // Disable transition to reset
-        IsselectedElement.style.transform = "translateX(-50px)"; // Set to left position
+        selectedElement.style.transition = "none"; // Disable transition to reset
+        selectedElement.style.transform = "translateX(-50px)"; // Set to left position
 
         // Trigger reflow to ensure the browser applies the reset styles
-        void IsselectedElement.offsetHeight;
+        void selectedElement.offsetHeight;
 
-        IsselectedElement.style.opacity = '0.4';
+        selectedElement.style.opacity = '0.4';
 
         // Apply the rightward animation to the original position
-        IsselectedElement.style.transition = `transform ${transitionDuration}s ease`; // Set dynamic transition time
-        IsselectedElement.style.transform = "translateX(0)"; // Move to original position
+        selectedElement.style.transition = `transform ${transitionDuration}s ease`; // Set dynamic transition time
+        selectedElement.style.transform = "translateX(0)"; // Move to original position
 
         setTimeout(() => {
-            IsselectedElement.style.opacity = '1';
-            IsselectedElement.style.transition = `opacity ${transitionDuration}s ease, visibility ${transitionDuration}s ease`; // Set dynamic opacity transition time
+            selectedElement.style.opacity = '1';
+            selectedElement.style.transition = `opacity ${transitionDuration}s ease, visibility ${transitionDuration}s ease`; // Set dynamic opacity transition time
         }, transitionDuration * 1000); // Convert to milliseconds
     }
 });
@@ -615,20 +635,12 @@ rightdiv.addEventListener("mousemove", function (event) {
 });
 
 
-
-rightdiv.addEventListener("mouseleave", function () {
-    if (IsselectedElement) {
-  
-      
-      
-        IsselectedElement.style.transition = "transform 0.5s ease"; // Re-enable transition
-        IsselectedElement.style.transform = "translateX(0)"; // Move to original position
-        
-      
-
-    } 
-    
-});
+// rightdiv.addEventListener("mouseleave", function () {
+//     if (IsselectedElement) {
+//         IsselectedElement.style.transition = "transform 5.5s ease"; // Re-enable transition
+//         IsselectedElement.style.transform = "translateX(10)"; // Move to original position
+//     }  
+// });
 
 let input44 = document.getElementById("input4");
 
@@ -685,26 +697,28 @@ rightleft.addEventListener("click", function () {
 
 rightleft.addEventListener("mouseenter", function () {
     if (IsselectedElement) {
+        let selectedElement = IsselectedElement; // Store reference to prevent loss of context
+
         // Get the value from input44 to determine the transition duration
         let transitionDuration = parseFloat(input44.value); // Get the value as a float
         transitionDuration = isNaN(transitionDuration) ? 0.5 : transitionDuration; // Default to 0.5s if not valid
 
         // Reset the element's transform and transition before applying the animation
-        IsselectedElement.style.transition = "none"; // Disable transition to reset
-        IsselectedElement.style.transform = "translateX(50px)"; // Set to right position
+        selectedElement.style.transition = "none"; // Disable transition to reset
+        selectedElement.style.transform = "translateX(50px)"; // Set to right position
 
         // Trigger reflow to ensure the browser applies the reset styles
-        void IsselectedElement.offsetHeight;
+        void selectedElement.offsetHeight;
 
-        IsselectedElement.style.opacity = '0.4';
+        selectedElement.style.opacity = '0.4';
 
         // Apply the leftward animation to the original position
-        IsselectedElement.style.transition = `transform ${transitionDuration}s ease`; // Set dynamic transition time
-        IsselectedElement.style.transform = "translateX(0)"; // Move to original position
+        selectedElement.style.transition = `transform ${transitionDuration}s ease`; // Set dynamic transition time
+        selectedElement.style.transform = "translateX(0)"; // Move to original position
 
         setTimeout(() => {
-            IsselectedElement.style.opacity = '1';
-            IsselectedElement.style.transition = `opacity ${transitionDuration}s ease, visibility ${transitionDuration}s ease`; // Set dynamic opacity transition time
+            selectedElement.style.opacity = '1';
+            selectedElement.style.transition = `opacity ${transitionDuration}s ease, visibility ${transitionDuration}s ease`; // Set dynamic opacity transition time
         }, transitionDuration * 1000); // Convert to milliseconds
     }
 });
@@ -715,12 +729,12 @@ rightleft.addEventListener("mousemove", function (event) {
     event.stopPropagation();
 });
 
-rightleft.addEventListener("mouseleave", function () {
-    if (IsselectedElement) {
-        IsselectedElement.style.transition = "transform 0.5s ease"; // Re-enable transition
-        IsselectedElement.style.transform = "translateX(0)"; // Move to original position
-    } 
-});
+// rightleft.addEventListener("mouseleave", function () {
+//     if (IsselectedElement) {
+//         IsselectedElement.style.transition = "transform 0.5s ease"; // Re-enable transition
+//         IsselectedElement.style.transform = "translateX(0)"; // Move to original position
+//     } 
+// });
 
 previewbutton.addEventListener('mouseover',function(){
     previewbutton.style.transform='scale(0.8)'
