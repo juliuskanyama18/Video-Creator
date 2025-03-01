@@ -52,7 +52,7 @@
     newLeft = clamp(newLeft, 0, parentRect.width - newWidth);
 
     return { newWidth, newHeight, newTop, newLeft };
-};
+    };
 
     
             const onMouseDown = (e, handleId) => {
@@ -71,7 +71,7 @@
                 document.addEventListener("mousemove", onMouseMove);
                 document.addEventListener("mouseup", onMouseUp);
             };
-    
+            
             const onMouseMove = (e) => {
                 const dx = e.clientX - startX;
                 const dy = e.clientY - startY;
@@ -111,5 +111,17 @@
                 const handle = document.getElementById(handleId);
                 handle.addEventListener("mousedown", (e) => onMouseDown(e, handleId));
             });
+
+            //hover eventlistener for imagebox
+            imageBox.addEventListener('mouseover', () => {
+                imageBox.style.transform = 'scale(0.95)';
+                imageBox.style.transition = 'transform 0.4s ease';
+            });
+            imageBox.addEventListener('mouseout', () => { 
+                imageBox.style.transform = 'scale(1.00)';
+                imageBox.style.transition = 'transform 0.4s ease';
+            });
         });
+
+
    

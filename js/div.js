@@ -114,7 +114,7 @@ const box = document.getElementById('draggable-resizable-box');
         };
     
         makeDraggableAndResizable1(box);
- 
+        //hover eventlistener for box
         box.addEventListener('mouseover', () => {
             box.style.transform = 'scale(0.95)';
             box.style.transition = 'transform 0.4s ease';

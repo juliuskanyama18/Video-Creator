@@ -234,8 +234,7 @@ box-shadow: 8px 8px 24px -12px rgba(66, 68, 90, 1);
 }
 
 #image-box:hover .imageHandle{
-opacity: 1;
-
+margin: 3px;
 }
 
 
@@ -511,7 +510,7 @@ opacity: 1;
     grid-column: -5/-3;
     width: 200%; /* Set smaller default width */
     /* Set smaller default height */
-    border: 1px solid #081b2d;
+    /* border: 1px solid #081b2d; */
 }
 
 #image-box {}

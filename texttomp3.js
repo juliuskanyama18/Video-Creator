@@ -46,9 +46,9 @@
 // Example usage
 textToMP3("Hello, this is a test message.");
 
-Example 2: Using Google Cloud Text-to-Speech API
+// Example 2: Using Google Cloud Text-to-Speech API
 
-For more advanced usage, you can use the Google Cloud Text-to-Speech API. This requires setting up a Google Cloud project and obtaining API credentials.
+// For more advanced usage, you can use the Google Cloud Text-to-Speech API. This requires setting up a Google Cloud project and obtaining API credentials.
 
 const textToSpeech = require('@google-cloud/text-to-speech');
 const fs = require('fs');

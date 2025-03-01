@@ -36,10 +36,10 @@ animationpanel.appendChild(updiv)
 
 
 
-// updiv.addEventListener("mouseleave",function(e){
-//     updiv.style.transform='scale(1)'
-//     updiv.style.transition='transform 0.5s ease'
-// })
+updiv.addEventListener("mouseleave",function(e){
+    updiv.style.transform='scale(1)'
+    updiv.style.transition='transform 0.5s ease'
+})
 
 let iconUp1=document.createElement("img")
 iconUp1.src="images/icon/fi-rr-caret-up.svg"
@@ -104,10 +104,10 @@ downdiv.addEventListener("mouseenter",function(e){
     // downdiv.style.border='1px solid blue'
 })
 
-// downdiv.addEventListener("mouseleave",function(e){
-//     downdiv.style.transform='scale(1)'
-//     downdiv.style.transition='transform 0.5s ease'
-// })
+downdiv.addEventListener("mouseleave",function(e){
+    downdiv.style.transform='scale(1)'
+    downdiv.style.transition='transform 0.5s ease'
+})
 
 let icondown=document.createElement("img")
 icondown.src="images/icon/fi-rr-caret-down.svg"
@@ -181,10 +181,10 @@ rightdiv.addEventListener("mouseenter",function(e){
 
 })
 
-// rightdiv.addEventListener("mouseleave",function(e){
-//     rightdiv.style.transform='scale(1)'
-//     rightdiv.style.transition='transform 0.5s ease'
-// })
+rightdiv.addEventListener("mouseleave",function(e){
+    rightdiv.style.transform='scale(1)'
+    rightdiv.style.transition='transform 0.5s ease'
+})
 
 let iconright=document.createElement("img")
 iconright.src="images/icon/fi-rr-caret-right.svg"
@@ -263,10 +263,10 @@ rightleft.addEventListener("mouseenter",function(e){
     
 })
 
-// rightleft.addEventListener("mouseleave",function(e){
-//     rightleft.style.transform='scale(1)'
-//     rightleft.style.transition='transform 0.5s ease'
-// })
+rightleft.addEventListener("mouseleave",function(e){
+    rightleft.style.transform='scale(1)'
+    rightleft.style.transition='transform 0.5s ease'
+})
 
 let iconLeft=document.createElement("img")
 iconLeft.src="images/icon/fi-rr-caret-left.svg"
@@ -402,7 +402,7 @@ updiv.addEventListener('click', function () {
 });
 
 
-// Handle "mouseenter" for down animation
+// Handle "mouseenter" for up animation
 updiv.addEventListener("mouseenter", function () {
     if (IsselectedElement) {
         let selectedElement = IsselectedElement; // Store reference to prevent loss of context
