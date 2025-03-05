@@ -82,6 +82,10 @@ const box = document.getElementById('draggable-resizable-box');
         };
     
         const onMouseUp = () => {
+            if (isDragging || isResizing){
+                //save settings for dragging and resizing
+                saveState();
+            }
             isResizing = false;
             isDragging = false;
             document.removeEventListener('mousemove', onMouseMove);
@@ -125,29 +129,83 @@ const box = document.getElementById('draggable-resizable-box');
             box.style.transition = 'transform 0.4s ease';
         });
 
-       
-   
+ 
 
 
+    const history = []; // To store the history of positions and sizes
 
-    // const DublicateBox = () => {
-        //     if (getComputedStyle(box).opacity === "1") {
-        //         const newBox = box.cloneNode(true);
-        //         newBox.style.position = 'absolute';
-        //         newBox.style.top = `${Math.random() * 400}px`;
-        //         newBox.style.left = `${Math.random() * 400}px`;
-        //         newBox.style.zIndex = '10';
-        //         background1.appendChild(newBox);
-        //         makeDraggableAndResizable1(newBox);
-        //     } else {
-        //         console.log("Box opacity is not 1, duplication not allowed.");
-        //     }
-        // };
+
+    // Function to save the current state (position and size) of the box
+    const saveState = (deletedElement = null) => {
+        if (deletedElement instanceof HTMLElement) {
+            // Save the entire element to restore later
+            history.push({ 
+                action: "delete", 
+                element: deletedElement, // Store actual element
+                parent: deletedElement.parentElement, // Store parent for reinsertion
+                nextSibling: deletedElement.nextSibling // Store next sibling to maintain order
+             });
+        } else {
+            const computedStyle = getComputedStyle(box);
+            const state = {
+                action: "update",
+                width: box.offsetWidth + "px",
+                height: box.offsetHeight + "px",
+                top: box.style.top,
+                left: box.style.left,
+                backgroundColor: computedStyle.backgroundColor,
+                opacity: computedStyle.opacity
+            };
+
+            // Prevent storing duplicate states
+            if (history.length === 0 || JSON.stringify(history[history.length - 1]) !== JSON.stringify(state)) {
+            history.push(state);
+            }
+        }
+    };
+
+    // Function to undo the last change
+    const undo = () => {
+        if (history.length > 1) { 
+            history.pop(); 
+            // const previousState =  history.pop();
+            const previousState = history[history.length - 1]; // Get last saved state
+
+            if (previousState.action === "delete" && previousState.element && previousState.parent) {
+                // Restore deleted element at the same position
+                if (previousState.nextSibling) {
+                    previousState.parent.insertBefore(previousState.element, previousState.nextSibling);
+                } else {
+                    previousState.parent.appendChild(previousState.element);
+                }
+            } else if (previousState.action === "update") {
+                //Apply the previous state
+                box.style.width = previousState.width;
+                box.style.height = previousState.height;
+                box.style.top = previousState.top;
+                box.style.left = previousState.left;
+                box.style.backgroundColor = previousState.backgroundColor;
+                box.style.opacity = previousState.opacity;
+            }
+        }
+    };
+
     
-        // document.addEventListener('keydown', (e) => {
-        //     if (e.ctrlKey && e.key === 'd') {
-        //         e.preventDefault();
-        //         DublicateBox();
-        //     }
-        // });</script>
+
+
+    // Detect "Ctrl + Z" to trigger undo
+    document.addEventListener("keydown", (e) => {
+        if (e.ctrlKey && e.key === 'z') {
+            e.preventDefault();  // Prevent default behavior (e.g., undo in the browser)
+            undo();
+            console.log(history)
+        }
+    });
+
+
+     // Save initial state when the document is fully loaded
+     document.addEventListener("DOMContentLoaded", () => {
+        saveState();
+        console.log(history)
+    });
     

@@ -407,7 +407,7 @@ updiv.addEventListener("mouseenter", function () {
     if (IsselectedElement) {
         let selectedElement = IsselectedElement; // Store reference to prevent loss of context
 
-        let transitionDuration = parseFloat(input22.value);
+        let transitionDuration = parseFloat(input11.value);
         transitionDuration = isNaN(transitionDuration) ? 0.5 : transitionDuration;
 
         selectedElement.style.transition = "none";

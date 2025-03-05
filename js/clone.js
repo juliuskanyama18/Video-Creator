@@ -342,31 +342,36 @@ document.addEventListener("keydown", (e) => {
         }
     }
 });
+
+// //To store the history of previous state
+// const history = [];
+
 // Listen to keyboard event for Ctrl+Z undo
-document.addEventListener("keydown", (e) => {
-    if (e.ctrlKey && e.key === 'z') {
-        e.preventDefault();  // Prevent default behavior (e.g., undo in the browser)
-        undoLastAction();
-    }
-});
+// document.addEventListener("keydown", (e) => {
+//     if (e.ctrlKey && e.key === 'z') {
+//         e.preventDefault();  // Prevent default behavior (e.g., undo in the browser)
+//         undoLastAction();
+//         console.log(history)
+//     }
+// });
 // Undo the last action
-const undoLastAction = () => {
-    if (history.length > 0) {
-        const lastAction = history.pop();
-        switch (lastAction.action) {
-            case 'clone':
-                // Remove the last cloned element
-                background.removeChild(lastAction.element);
-                break;
-            case 'resize':
-                // Undo the resize by reverting the styles to the original state
-                lastAction.element.style.cssText = lastAction.styles;
-                break;
-            case 'delete':
-                // If a delete action was recorded, restore the element (if it was deleted)
-                break;
-            // Add other cases if needed for additional actions
-        }
-    }
-};
+// const undoLastAction = () => {
+//     if (history.length > 0) {
+//         const lastAction = history.pop();
+//         switch (lastAction.action) {
+//             case 'clone':
+//                 // Remove the last cloned element
+//                 background.removeChild(lastAction.element);
+//                 break;
+//             case 'resize':
+//                 // Undo the resize by reverting the styles to the original state
+//                 lastAction.element.style.cssText = lastAction.styles;
+//                 break;
+//             case 'delete':
+//                 // If a delete action was recorded, restore the element (if it was deleted)
+//                 break;
+//             // Add other cases if needed for additional actions
+//         }
+//     }
+// };
 

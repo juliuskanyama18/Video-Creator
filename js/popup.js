@@ -441,19 +441,24 @@ fourthdiv.addEventListener('mouseout',function(){
     fourthdiv.style.transition='all 0.3s ease'
 })
 popupBody.appendChild(fourthdiv)
+//click listener for the delete option
 fourthdiv.addEventListener('click', function() {           
     console.log(selectedElementId)           
-    if (selectedElementId !== "background" || selectedElementId !=='thirdpopup') {           
-selectedElement.remove();
-popup.style.opacity='0.3'
-popup.style.transform='scale(0.98)'
-popup.style.transition='transform 0.3s ease'
-setTimeout(()=>{
-    popup.style.display='none'        
-},300)     
+    if (selectedElementId !== "background" && selectedElementId !=='thirdpopup') {
+         // Save the entire element reference, not just its HTML
+         saveState(selectedElement); 
+
+        selectedElement.remove();  //delete the selected element
+        console.log(history)
+        
+        popup.style.opacity='0.3'
+        popup.style.transform='scale(0.98)'
+        popup.style.transition='transform 0.3s ease'
+        setTimeout(()=>{
+        popup.style.display='none'        
+        },300)     
     }
-}
-);
+});
 let fourthdivicon=document.createElement('img')
 fourthdivicon.src='images/icon/Delete.png'
 fourthdivicon.style.width='24px'
@@ -649,6 +654,8 @@ else if (selectedElement.nodeName === "DIV" &&
     selectedElement.style.backgroundColor = event.target.value;
 }
 }
+// saveState(); save state of the colorpicker selection(now being done by mouseup)
+console.log(history);
 });
 let colorPicker1 = document.querySelector('#color-picker');
 // Show `secondpopup` when the color picker gains focus
