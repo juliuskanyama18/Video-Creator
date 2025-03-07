@@ -654,7 +654,7 @@ else if (selectedElement.nodeName === "DIV" &&
     selectedElement.style.backgroundColor = event.target.value;
 }
 }
-// saveState(); save state of the colorpicker selection(now being done by mouseup)
+// saveState(); //save state of the colorpicker selection(now being done by mouseup)
 console.log(history);
 });
 let colorPicker1 = document.querySelector('#color-picker');

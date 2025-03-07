@@ -132,80 +132,82 @@ const box = document.getElementById('draggable-resizable-box');
  
 
 
-    const history = []; // To store the history of positions and sizes
+        const history = []; // To store the history of positions and sizes
 
 
-    // Function to save the current state (position and size) of the box
-    const saveState = (deletedElement = null) => {
-        if (deletedElement instanceof HTMLElement) {
-            // Save the entire element to restore later
-            history.push({ 
-                action: "delete", 
-                element: deletedElement, // Store actual element
-                parent: deletedElement.parentElement, // Store parent for reinsertion
-                nextSibling: deletedElement.nextSibling // Store next sibling to maintain order
-             });
-        } else {
-            const computedStyle = getComputedStyle(box);
-            const state = {
-                action: "update",
-                width: box.offsetWidth + "px",
-                height: box.offsetHeight + "px",
-                top: box.style.top,
-                left: box.style.left,
-                backgroundColor: computedStyle.backgroundColor,
-                opacity: computedStyle.opacity
-            };
-
-            // Prevent storing duplicate states
-            if (history.length === 0 || JSON.stringify(history[history.length - 1]) !== JSON.stringify(state)) {
-            history.push(state);
-            }
-        }
-    };
-
-    // Function to undo the last change
-    const undo = () => {
-        if (history.length > 1) { 
-            history.pop(); 
-            // const previousState =  history.pop();
-            const previousState = history[history.length - 1]; // Get last saved state
-
-            if (previousState.action === "delete" && previousState.element && previousState.parent) {
-                // Restore deleted element at the same position
-                if (previousState.nextSibling) {
-                    previousState.parent.insertBefore(previousState.element, previousState.nextSibling);
-                } else {
-                    previousState.parent.appendChild(previousState.element);
+        // Function to save the current state (position and size) of the box
+        const saveState = (deletedElement = null) => {
+            if (deletedElement instanceof HTMLElement) {
+                // Save the entire element to restore later
+                history.push({ 
+                    action: "delete", 
+                    element: deletedElement, // Store actual element
+                    parent: deletedElement.parentElement, // Store parent for reinsertion
+                    nextSibling: deletedElement.nextSibling // Store next sibling to maintain order
+                 });
+            } else {
+                const computedStyle = getComputedStyle(box);
+                const state = {
+                    action: "update",
+                    width: box.offsetWidth + "px",
+                    height: box.offsetHeight + "px",
+                    top: box.style.top,
+                    left: box.style.left,
+                    backgroundColor: computedStyle.backgroundColor,
+                    opacity: computedStyle.opacity
+                };
+    
+                // Prevent storing duplicate states
+                if (history.length === 0 || JSON.stringify(history[history.length - 1]) !== JSON.stringify(state)) {
+                history.push(state);
                 }
-            } else if (previousState.action === "update") {
-                //Apply the previous state
-                box.style.width = previousState.width;
-                box.style.height = previousState.height;
-                box.style.top = previousState.top;
-                box.style.left = previousState.left;
-                box.style.backgroundColor = previousState.backgroundColor;
-                box.style.opacity = previousState.opacity;
             }
-        }
-    };
-
+        };
     
+        // Function to undo the last change
+        const undo = () => {
+            if (history.length > 1) { 
+                // history.pop(); 
+                const lastState =  history.pop(); // Remove last change safely
+                const previousState = history[history.length - 1]; // Get last saved state
 
-
-    // Detect "Ctrl + Z" to trigger undo
-    document.addEventListener("keydown", (e) => {
-        if (e.ctrlKey && e.key === 'z') {
-            e.preventDefault();  // Prevent default behavior (e.g., undo in the browser)
-            undo();
+                if (!previousState) return; // Prevent accessing undefined states
+                if (!lastState) return; // Ensure lastState is defined
+    
+                if (lastState.action === "delete" && lastState.element && lastState.parent) {
+                    // Restore deleted element at the same position
+                    if (lastState.nextSibling) {
+                        lastState.parent.insertBefore(lastState.element, lastState.nextSibling);
+                    } else {
+                        lastState.parent.appendChild(lastState.element);
+                    }
+                } else if (lastState.action === "update") {
+                    //Apply the previous state
+                    box.style.width = previousState.width;
+                    box.style.height = previousState.height;
+                    box.style.top = previousState.top;
+                    box.style.left = previousState.left;
+                    box.style.backgroundColor = previousState.backgroundColor;
+                    box.style.opacity = previousState.opacity;
+                }
+            }
+        };
+    
+        
+    
+    
+        // Detect "Ctrl + Z" to trigger undo
+        document.addEventListener("keydown", (e) => {
+            if (e.ctrlKey && e.key === 'z') {
+                e.preventDefault();  // Prevent default behavior (e.g., undo in the browser)
+                undo();
+                console.log(history)
+            }
+        });
+    
+    
+         // Save initial state when the document is fully loaded
+         document.addEventListener("DOMContentLoaded", () => {
+            saveState();
             console.log(history)
-        }
-    });
-
-
-     // Save initial state when the document is fully loaded
-     document.addEventListener("DOMContentLoaded", () => {
-        saveState();
-        console.log(history)
-    });
-    
+        });
