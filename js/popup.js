@@ -657,6 +657,7 @@ else if (selectedElement.nodeName === "DIV" &&
 // saveState(); //save state of the colorpicker selection(now being done by mouseup)
 console.log(history);
 });
+// Add a focus event listener to the color picker
 let colorPicker1 = document.querySelector('#color-picker');
 // Show `secondpopup` when the color picker gains focus
 colorPicker1.addEventListener('focus', function () {

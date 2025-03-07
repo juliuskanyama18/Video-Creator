@@ -198,6 +198,8 @@ box-shadow: 8px 8px 24px -12px rgba(66, 68, 90, 1);
     position: relative;
     /* width: 250px;
     height: 250px; */
+    left: 365px;  /* Adjust position manually */
+    top: 85px;
     width: 190px;
     height: 190px;
     border-radius: 50%;
@@ -207,8 +209,8 @@ box-shadow: 8px 8px 24px -12px rgba(66, 68, 90, 1);
         padding: 1px;
         background-color: #f0f0f0; */
     display: grid;
-    grid-column: -1/-2;
-    grid-row: -2/-1;
+    /* grid-column: -1/-2;
+    grid-row: -2/-1; */
     align-self: end;
     z-index: 1;
     cursor: move;
