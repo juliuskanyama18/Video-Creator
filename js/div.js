@@ -84,7 +84,7 @@ const box = document.getElementById('draggable-resizable-box');
         const onMouseUp = () => {
             if (isDragging || isResizing){
                 //save settings for dragging and resizing
-                saveState();
+                boxsaveState();
             }
             isResizing = false;
             isDragging = false;
@@ -132,14 +132,79 @@ const box = document.getElementById('draggable-resizable-box');
  
 
 
-        const history = []; // To store the history of positions and sizes
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        const boxhistory = []; // To store the boxhistory of positions and sizes
 
 
         // Function to save the current state (position and size) of the box
-        const saveState = (deletedElement = null) => {
+        const boxsaveState = (deletedElement = null) => {
             if (deletedElement instanceof HTMLElement) {
                 // Save the entire element to restore later
-                history.push({ 
+                boxhistory.push({ 
                     action: "delete", 
                     element: deletedElement, // Store actual element
                     parent: deletedElement.parentElement, // Store parent for reinsertion
@@ -147,29 +212,31 @@ const box = document.getElementById('draggable-resizable-box');
                  });
             } else {
                 const computedStyle = getComputedStyle(box);
+                const textBoxcomputedStyle = getComputedStyle(textBox1);
                 const state = {
                     action: "update",
-                    width: box.offsetWidth + "px",
-                    height: box.offsetHeight + "px",
-                    top: box.style.top,
-                    left: box.style.left,
                     backgroundColor: computedStyle.backgroundColor,
-                    opacity: computedStyle.opacity
+                    height: box.offsetHeight + "px",
+                    left: box.style.left,
+                    opacity: computedStyle.opacity,
+                    top: box.style.top,
+                    width: box.offsetWidth + "px",
+                     
                 };
     
                 // Prevent storing duplicate states
-                if (history.length === 0 || JSON.stringify(history[history.length - 1]) !== JSON.stringify(state)) {
-                history.push(state);
+                if (boxhistory.length === 0 || JSON.stringify(boxhistory[boxhistory.length - 1]) !== JSON.stringify(state)) {
+                    boxhistory.push(state);
                 }
             }
         };
     
-        // Function to undo the last change
-        const undo = () => {
-            if (history.length > 1) { 
-                // history.pop(); 
-                const lastState =  history.pop(); // Remove last change safely
-                const previousState = history[history.length - 1]; // Get last saved state
+        // Function to boxundo the last change
+        const boxundo = () => {
+            if (boxhistory.length > 1) { 
+                // boxhistory.pop(); 
+                const lastState =  boxhistory.pop(); // Remove last change safely
+                const previousState = boxhistory[boxhistory.length - 1]; // Get last saved state
 
                 if (!previousState) return; // Prevent accessing undefined states
                 if (!lastState) return; // Ensure lastState is defined
@@ -196,18 +263,18 @@ const box = document.getElementById('draggable-resizable-box');
         
     
     
-        // Detect "Ctrl + Z" to trigger undo
+        // Detect "Ctrl + Z" to trigger boxundo
         document.addEventListener("keydown", (e) => {
             if (e.ctrlKey && e.key === 'z') {
                 e.preventDefault();  // Prevent default behavior (e.g., undo in the browser)
-                undo();
-                console.log(history)
+                boxundo();
+                console.log(boxhistory)
             }
         });
     
     
          // Save initial state when the document is fully loaded
          document.addEventListener("DOMContentLoaded", () => {
-            saveState();
-            console.log(history)
+            boxsaveState();
+            console.log(boxhistory)
         });

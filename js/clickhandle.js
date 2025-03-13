@@ -250,6 +250,7 @@ imagebox.addEventListener('click', function(event) {
     // hideImageboxHandles(); // Hide imagebox resize handles
     hideAllHandles(activeElement);
     showimageboxresizehandle(event); // Show the box resize handles
+    
 })
 
 
@@ -271,75 +272,9 @@ document.addEventListener('click', function(e) {
         hideImageboxHandles(); // Hide the imagebox resize handles
         hideAllHandles(activeElement);
         IsselectedElement = null; // Clear the selected element
-        console.log("No element selected");  
+        console.log("No element selected"); 
+        console.log(texthistory); 
 
     }
 });
-
-
-
-
-
-
-
-// const history = []; // To store the history of positions, sizes, and other properties
-
-// // Function to save the current state (position, size, and other properties) of an element
-// const saveState = (IsselectedElement) => {
-//     if (!IsselectedElement) return;
-
-//     const computedStyle = getComputedStyle(IsselectedElement);
-//     const state = {
-//         id: IsselectedElement.id,  // Store element ID or another identifier
-//         width: IsselectedElement.offsetWidth,
-//         height: IsselectedElement.offsetHeight,
-//         top: parseFloat(IsselectedElement.style.top) || 0,
-//         left: parseFloat(IsselectedElement.style.left) || 0,
-//         color: computedStyle.color,
-//         value: IsselectedElement.value || "",  // Capture text if it's an input field
-//         src: IsselectedElement.src || "" // Capture image source if it's an image
-//     };
-    
-//     history.push(state);
-// };
-
-// // Function to undo the last change
-// const undo = () => {
-//     if (history.length > 0) {
-//         const previousState = history.pop();
-//         let IsselectedElement = document.getElementById(previousState.id); // Get element by stored ID
-
-//         if (IsselectedElement) {
-//             IsselectedElement.style.width = previousState.width + "px";
-//             IsselectedElement.style.height = previousState.height + "px";
-//             IsselectedElement.style.top = previousState.top + "px";
-//             IsselectedElement.style.left = previousState.left + "px";
-//             IsselectedElement.style.color = previousState.color;
-
-//             if (IsselectedElement.tagName === "INPUT" || IsselectedElement.tagName === "TEXTAREA") {
-//                 IsselectedElement.value = previousState.value; // Restore input text
-//             } 
-//             if (IsselectedElement.tagName === "IMG") {
-//                 IsselectedElement.src = previousState.src; // Restore image source
-//             }
-//         }
-//     }
-// };
-
-// // Event listener for keyboard undo (Ctrl + Z)
-// document.addEventListener("keydown", (e) => {
-//     if (e.ctrlKey && e.key === 'z') {
-//         e.preventDefault(); // Prevent default browser undo behavior
-//         console.log("undo")
-//         undo();
-//     }
-// });
-
-// // Save initial state for all relevant elements
-// document.addEventListener("DOMContentLoaded", () => {
-//     document.querySelectorAll("#draggable-resizable-box, #image-box, #text-box").forEach((IsselectedElement) => {
-//         // saveState(IsselectedElement);
-//         console.log(history);
-//     });
-// });
 

@@ -374,9 +374,7 @@ margin: 3px;
         #text-box {
             position: absolute;
             top: 18px;
-            left: 509px;
-             /* width: 300px; */
-            /* height: 100px; */ 
+            left: 509px; 
             padding: 13px;
 
             background-color: transparent;
@@ -572,7 +570,6 @@ margin: 3px;
     border: none;
 }
            
-#text-box {}
 
 .clone {
     /* -webkit-text-size-adjust: auto; /* or none */

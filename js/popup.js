@@ -446,10 +446,10 @@ fourthdiv.addEventListener('click', function() {
     console.log(selectedElementId)           
     if (selectedElementId !== "background" && selectedElementId !=='thirdpopup') {
          // Save the entire element reference, not just its HTML
-         saveState(selectedElement); 
+         boxsaveState(selectedElement); 
 
         selectedElement.remove();  //delete the selected element
-        console.log(history)
+        console.log(boxhistory)
         
         popup.style.opacity='0.3'
         popup.style.transform='scale(0.98)'
@@ -530,6 +530,8 @@ seconddivrange.style.display='none'
 secondpopup.appendChild(secondpopupPer)
 secondpopup.appendChild(seconddivrange)
 popupBody.appendChild(seconddiv)
+
+//click listener for the opacity popup
 seconddiv.addEventListener('click',function(){
     secondpopup.style.opacity='1'
         secondpopup.style.display='grid'
@@ -574,13 +576,18 @@ document.addEventListener("contextmenu", (e) => {
         popup.style.display = 'none'; // Hide the popup if it is visible
     }
 });
+//
 function moverange() {
-// Update the range display value
-secondpopupPer.value = seconddivrange.value + '%';
-// Update the opacity of the selected element
-if (selectedElement) {
-selectedElement.style.opacity = seconddivrange.value / 100;
-}
+    // Update the range display value
+    secondpopupPer.value = seconddivrange.value + '%';
+    // Update the opacity of the selected element
+    if (selectedElement) {
+        selectedElement.style.opacity = seconddivrange.value / 100;
+
+        // Call textsaveState to save the opacity change
+        textsaveState(); // Save the state after changing opacity
+
+    }
 }
 // Add event listeners for range sliding
 seconddivrange.addEventListener('mousedown', function () {
@@ -654,8 +661,8 @@ else if (selectedElement.nodeName === "DIV" &&
     selectedElement.style.backgroundColor = event.target.value;
 }
 }
-// saveState(); //save state of the colorpicker selection(now being done by mouseup)
-console.log(history);
+textsaveState(); //save state of the colorpicker selection(now being done by mouseup)
+console.log(texthistory);
 });
 // Add a focus event listener to the color picker
 let colorPicker1 = document.querySelector('#color-picker');
