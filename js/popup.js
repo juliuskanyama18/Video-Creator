@@ -592,7 +592,7 @@ function moverange() {
         selectedElement.style.opacity = seconddivrange.value / 100;
 
         // Call textsaveState to save the opacity change
-        textsaveState(); // Save the state of textbox after changing opacity
+        // textsaveState(); // Save the state of textbox after changing opacity
         // imgsaveState(); // save the state of imagebox after changing opacity
 
     }
@@ -608,10 +608,10 @@ document.addEventListener('mouseup', function () {
     document.removeEventListener('mousemove', moverange);
 
     // Save the final state after opacity change
-    if (selectedElement) {
+    // if (selectedElement) {
         // imgsaveState();
-        // textsaveState(); // Save the state of textbox after changing opacity
-    }
+        textsaveState(); // Save the state of textbox after changing opacity
+    // }
 });
 // Add an event listener for mouse leaving the secondpopup
 secondpopup.addEventListener('mouseleave', function (e) {

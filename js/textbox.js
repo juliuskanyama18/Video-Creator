@@ -167,7 +167,6 @@
 
          
         const texthistory = []; // To store the boxhistory of positions and sizes
-
         const textContent1 = document.getElementById("text-content");
 
 
@@ -201,11 +200,11 @@
                     child: {
                         color: childStyle.color,
                         content: textContent1.innerHTML, // Save text content as well
-                        fontSize: childStyle.fontSize,
-                        fontWeight: childStyle.fontWeight,
+                        // fontSize: childStyle.fontSize,
+                        // fontWeight: childStyle.fontWeight,
                         // height: textContent1.offsetHeight + "px",
                         // left: textContent1.style.left,
-                        opacity: childStyle.opacity,
+                        opacity: childStyle.opacity
                         // textAlign: childStyle.textAlign,
                         // top: textContent1.style.top,
                         // width: textContent1.offsetWidth + "px"
@@ -266,8 +265,8 @@
                 if (!previousState) return; // Ensure a valid state exists
                 if (!lastState) return; // Ensure lastState is defined
         
-                const textBox1 = document.getElementById("text-box");
-                const textContent1 = document.getElementById("text-content");
+                // const textBox1 = document.getElementById("text-box");
+                // const textContent1 = document.getElementById("text-content");
         
                 if (!textBox1 || !textContent1) return;
         
