@@ -286,7 +286,7 @@
                     textContent1.style.fontWeight = previousState.child.fontWeight;
                     textContent1.style.textAlign = previousState.child.textAlign;
                     textContent1.innerHTML = previousState.child.content;
-                    textContent1.style.opacity = previousState.parent.opacity;
+                    textContent1.style.opacity = previousState.child.opacity;
                 } else if (lastState.action === "delete" && lastState.element && lastState.parent) {
                     // Restore deleted text box
                     if (lastState.nextSibling) {

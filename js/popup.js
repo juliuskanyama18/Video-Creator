@@ -570,6 +570,13 @@ document.addEventListener("contextmenu", (e) => {
         popup.style.opacity='1'
         popup.style.left = `${e.pageX}px`;
         popup.style.top = `${e.pageY}px`;
+            if ( selectedElement == imagecontent) {
+                firstdiv1.style.pointerEvents = 'none';
+                firstdiv1.style.opacity = '0.5';
+            }   else{
+                firstdiv1.style.pointerEvents = 'auto';
+                firstdiv1.style.opacity = '1';  
+            } 
         popup.style.display = 'block';
     } else {
         // Allow default browser context menu for clicks outside background
@@ -585,9 +592,11 @@ function moverange() {
         selectedElement.style.opacity = seconddivrange.value / 100;
 
         // Call textsaveState to save the opacity change
-        textsaveState(); // Save the state after changing opacity
+        textsaveState(); // Save the state of textbox after changing opacity
+        // imgsaveState(); // save the state of imagebox after changing opacity
 
     }
+    
 }
 // Add event listeners for range sliding
 seconddivrange.addEventListener('mousedown', function () {
@@ -596,7 +605,13 @@ popup.style.opacity='0'
 });
 // Stop listening for mousemove on mouseup
 document.addEventListener('mouseup', function () {
-document.removeEventListener('mousemove', moverange);
+    document.removeEventListener('mousemove', moverange);
+
+    // Save the final state after opacity change
+    if (selectedElement) {
+        // imgsaveState();
+        // textsaveState(); // Save the state of textbox after changing opacity
+    }
 });
 // Add an event listener for mouse leaving the secondpopup
 secondpopup.addEventListener('mouseleave', function (e) {
@@ -634,6 +649,8 @@ firstdiv1.addEventListener("mouseout", function() {
 // Programmatically trigger a click on the color picker
 colorPicker.style.opacity='0'  
 });
+let imagecontent = document.getElementById('image-content');
+
 // Add click event listener to the colorDisplay div
 firstdiv1.addEventListener("click", function() {
 // Programmatically trigger a click on the color picker
@@ -641,7 +658,6 @@ popup.style.transition='1 0.7s ease'
 popup.style.opacity='0.3'      
 popup.style.opacity=0.2
 colorPicker.click();
-console.log("sdfffffffff")
 setTimeout(()=>{  
     popup.style.display='none'
 },200)      

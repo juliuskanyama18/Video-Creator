@@ -96,6 +96,8 @@
                 isResizing = false;
                 document.removeEventListener("mousemove", onMouseMove);
                 document.removeEventListener("mouseup", onMouseUp);
+
+                imgsaveState();// Save state after resizing or dragging ends
             };
     
             // Adding drag functionality to the box
@@ -124,4 +126,128 @@
         });
 
 
-   
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        const imghistory = []; // To store the boxhistory of positions and sizes
+        const imageBox = document.getElementById("image-box");
+        const imgContent = document.getElementById("image-content");
+
+
+        // Function to save the current state (position and size) of the box
+        const imgsaveState = (deletedElement = null) => {
+            if (deletedElement instanceof HTMLElement) {
+                // Save the entire element to restore later
+                imghistory.push({ 
+                    action: "delete", 
+                    element: deletedElement, // Store actual element
+                    parent: deletedElement.parentElement, // Store parent for reinsertion
+                    nextSibling: deletedElement.nextSibling // Store next sibling to maintain order
+                 });
+            } else {
+                const imageBoxStyle = getComputedStyle(imageBox);
+                const imagecontentStyle = getComputedStyle(imgContent);
+                const state = {
+                    action: "update",
+                    // Parent (image box) styles
+                    parent: {
+                        backgroundColor: imageBoxStyle.backgroundColor,
+                        height: imagebox.offsetHeight + "px",
+                        left: imagebox.style.left,
+                        opacity: imageBoxStyle.opacity,
+                        top: imagebox.style.top,
+                        width: imagebox.offsetWidth + "px",    
+                    },
+                    // Child (image content) styles
+                    child: {
+                        // backgroundColor: imagecontentStyle.backgroundColor,
+                        // height: imgContent.offsetHeight + "px",
+                        // left: imgContent.style.left,
+                        opacity: imagecontentStyle.opacity,
+                        // top: imgContent.style.top,
+                        // width: imgContent.offsetWidth + "px",    
+                    }
+                };
+    
+                // Prevent storing duplicate states
+                if (imghistory.length === 0 || JSON.stringify(imghistory[imghistory.length - 1]) !== JSON.stringify(state)) {
+                    imghistory.push(state);
+                }
+            }
+        };
+    
+        // Function to boxundo the last change
+        const imgundo = () => {
+            if (imghistory.length > 1) { 
+                // boxhistory.pop(); 
+                const lastState =  imghistory.pop(); // Remove last change safely
+                const previousState = imghistory[imghistory.length - 1]; // Get last saved state
+
+                if (!previousState) return; // Prevent accessing undefined states
+                if (!lastState) return; // Ensure lastState is defined
+    
+                if (lastState.action === "delete" && lastState.element && lastState.parent) {
+                    // Restore deleted element at the same position
+                    if (lastState.nextSibling) {
+                        lastState.parent.insertBefore(lastState.element, lastState.nextSibling);
+                    } else {
+                        lastState.parent.appendChild(lastState.element);
+                    }
+                } else if (lastState.action === "update") {
+                    // Restore parent styles (image box)
+                    imagebox.style.width = previousState.parent.width;
+                    imagebox.style.height = previousState.parent.height;
+                    imagebox.style.top = previousState.parent.top;
+                    imagebox.style.left = previousState.parent.left;
+                    imagebox.style.backgroundColor = previousState.parent.backgroundColor;
+                    imagebox.style.opacity = previousState.parent.opacity;
+
+                    // Restore child styles (image content)
+                    // imgContent.style.width = previousState.child.width;
+                    // imgContent.style.height = previousState.child.height;
+                    // imgContent.style.top = previousState.child.top;
+                    // imgContent.style.left = previousState.child.left;
+                    // imgContent.style.backgroundColor = previousState.child.backgroundColor;
+                    imgContent.style.opacity = previousState.child.opacity;
+                }
+            }
+        };
+    
+        
+    
+    
+        // Detect "Ctrl + Z" to trigger boxundo
+        document.addEventListener("keydown", (e) => {
+            if (e.ctrlKey && e.key === 'z') {
+                e.preventDefault();  // Prevent default behavior (e.g., undo in the browser)
+                imgundo();
+                console.log(imghistory)
+            }
+        });
+    
+    
+         // Save initial state when the document is fully loaded
+         document.addEventListener("DOMContentLoaded", () => {
+            imgsaveState();
+            console.log(imghistory)
+        });

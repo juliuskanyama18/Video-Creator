@@ -273,7 +273,7 @@ document.addEventListener('click', function(e) {
         hideAllHandles(activeElement);
         IsselectedElement = null; // Clear the selected element
         console.log("No element selected"); 
-        console.log(texthistory); 
+        console.log(imghistory); 
 
     }
 });
