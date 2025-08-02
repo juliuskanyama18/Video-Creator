@@ -2,6 +2,7 @@
         document.addEventListener("DOMContentLoaded", function () {
             const imageBox = document.getElementById("image-box");
             const background = document.getElementById("background");
+            const imgContent = document.getElementById("image-content");
     
             let isDragging = false;
             let isResizing = false;
@@ -123,6 +124,70 @@
                 imageBox.style.transform = 'scale(1.00)';
                 imageBox.style.transition = 'transform 0.4s ease';
             });
+
+            
+            // Adding image upload functionality
+            imageUpload.addEventListener("change", function (event) {
+                const file = event.target.files[0];
+
+                if (file && file.type.startsWith("image/")) {
+                    const reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        // Remove previous uploaded image if exists
+                        const existingImg = document.getElementById("uploaded-image");
+                        if (existingImg) {
+                            existingImg.remove();
+                        }
+
+                        // Create a new image element
+                        const uploadedImg = document.createElement("img");
+                        uploadedImg.src = e.target.result;
+                        uploadedImg.id = "uploaded-image";
+                        uploadedImg.style.position = "absolute";
+                        uploadedImg.style.top = "0";
+                        uploadedImg.style.left = "0";
+                        uploadedImg.style.width = "100%";
+                        uploadedImg.style.height = "100%";
+                        // uploadedImg.style.objectFit = "contain"; // Ensure it fits inside the box
+                        uploadedImg.style.pointerEvents = "none"; // Prevent interference with dragging/resizing
+
+                        // Ensure image-box has a default width and height (or maintains aspect ratio)
+                        const img = new Image();
+                        img.src = e.target.result;
+                        img.onload = function () {
+                            const maxWidth = imageBox.parentElement.clientWidth;  // Get container width
+                            const maxHeight = imageBox.parentElement.clientHeight; // Get container height
+                            const aspectRatio = img.width / img.height;
+
+                            let newWidth = maxWidth;
+                            let newHeight = maxWidth / aspectRatio;
+
+                            if (newHeight > maxHeight) {
+                                newHeight = maxHeight;
+                                newWidth = maxHeight * aspectRatio;
+                            }
+
+                            // Apply new size to image-box
+                            imageBox.style.width = `${newWidth}px`;
+                            imageBox.style.height = `${newHeight}px`;
+                            imageBox.style.left = `${(maxWidth - newWidth) / 2}px`;
+                            imageBox.style.top = `${(maxHeight - newHeight) / 2}px`;
+
+                            // Append the uploaded image inside #image-box AFTER size adjustments
+                            imageBox.appendChild(uploadedImg);
+                        };
+
+                        // Save the new state after setting the image
+                        imgsaveState();
+                    };
+
+                    reader.readAsDataURL(file);
+                } else {
+                    alert("Please upload a valid image file.");
+                }
+            });
+
         });
 
 
